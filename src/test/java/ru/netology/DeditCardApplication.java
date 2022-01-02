@@ -9,9 +9,15 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class DeditCardApplication {
     @BeforeEach
+    void setUp() {
+
+        open("http://localhost:9999");
+
+    }
+
     @Test
     void personalDataPositiveTest() {
-        open("http://localhost:9999");
+//        open("http://localhost:9999");
         $("[type='text']").setValue("Иванов Иван");
         $("[type='tel']").setValue("+79678883455");
         $(".checkbox__box").click();
@@ -21,7 +27,7 @@ public class DeditCardApplication {
 
     @Test
     public void emptyNameField() {
-        open("http://localhost:9999");
+//        open("http://localhost:9999");
         $("[type='text']").setValue("");
         $("[type='tel']").setValue("+79678883455");
         $(".checkbox__box").click();
@@ -31,7 +37,7 @@ public class DeditCardApplication {
 
     @Test
     public void wrongPohneNumber() {
-        open("http://localhost:9999");
+//        open("http://localhost:9999");
         $("[type='text']").setValue("Иванов Иван");
         $("[type='tel']").setValue("788875");
         $(".checkbox__box").click();
@@ -41,7 +47,7 @@ public class DeditCardApplication {
 
     @Test
     public void emptyPohneField() {
-        open("http://localhost:9999");
+//        open("http://localhost:9999");
         $("[type='text']").setValue("Иванов Иван");
         $("[type='tel']").setValue("");
         $(".checkbox__box").click();
@@ -51,7 +57,7 @@ public class DeditCardApplication {
 
     @Test
     public void latinNameSurname() {
-        open("http://localhost:9999");
+//        open("http://localhost:9999");
         $("[type='text']").setValue("Ivanov Ivan");
         $("[type='tel']").setValue("+79678883455");
         $(".checkbox__box").click();
@@ -61,20 +67,25 @@ public class DeditCardApplication {
 
     @Test
     public void emptyForm() {
-        open("http://localhost:9999");
+//        open("http://localhost:9999");
         $("[type='text']").setValue("");
         $("[type='tel']").setValue("");
         $(".checkbox__box").click();
         $("button").click();
         $("[data-test-id=name].input_invalid .input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
-    } @Test
+    }
+
+    @Test
     void unmarkedСheckbox() {
-        open("http://localhost:9999");
+//        open("http://localhost:9999");
         $("[type='text']").setValue("Иванов Иван");
         $("[type='tel']").setValue("+79678883455");
 //        $(".checkbox__box").click();
-       $("button").click();
-        $(".checkbox__text").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй "));
+        $("button").click();
+//        $(".checkbox__text").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй "));
+        $("[data-test-id='agreement'].input_invalid .checkbox__text")
+                .shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных " +
+                        "и разрешаю сделать запрос в бюро кредитных историй "));
     }
 }
 
