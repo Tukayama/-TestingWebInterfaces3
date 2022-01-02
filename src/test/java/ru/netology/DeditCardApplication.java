@@ -76,7 +76,7 @@ public class DeditCardApplication {
     }
 
     @Test
-    void unmarkedСheckbox() {
+    void unmarkedCheckbox() {
 //        open("http://localhost:9999");
         $("[type='text']").setValue("Иванов Иван");
         $("[type='tel']").setValue("+79678883455");
